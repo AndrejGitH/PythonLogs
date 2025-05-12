@@ -1,19 +1,19 @@
-PythonLogs - Log File Merger
-This program reads and processes log files provided by the user and merges them into a single, structured output file.
+# PythonLogs - Log File Merger
 
-Main Features:
-Accepts multiple log file paths as input (space-separated)
+This Python program reads and merges multiple log files provided by the user.  
+It extracts timestamps and log messages, and outputs them into a clean, aligned table format.
 
-Reads and extracts timestamps and log messages
+---
 
-Automatically handles:
+## Features
 
-Duplicate timestamps (in one file: messages are appended)
-
-Missing data (empty cells left for missing timestamps)
-
-Corrupted timestamps (invalid formats are skipped)
-
-Merges all logs into a single file: mergedLogs.txt
-
-Includes basic unit tests using Python’s unittest
+- Accepts multiple file paths from user input (space-separated)
+- Reads log files and extracts:
+  - Timestamps (format: `HH:MM:SS.sss`)
+  - Log messages
+- Skips lines with corrupted or invalid timestamps
+- Merges all logs based on unique timestamps
+  - If the same timestamp appears more than once in a file, messages are appended
+  - If a timestamp is missing in a file, the output column is left empty
+- Outputs the merged log into a file called `mergedLogs.txt`
+- Includes unit tests for key functions
