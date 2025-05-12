@@ -1,0 +1,53 @@
+import unittest
+from MergeLogs import check_valid_format, get_timestamps, get_longest_message
+
+class TestMergeLogs(unittest.TestCase):
+    """Unit tests for Task 2 - Merging Logs"""
+
+    def test_valid_timestamp_format(self):
+        """HH:MM:SS.sss is only valid format"""
+        self.assertTrue(check_valid_format("16:00:00.000"))
+
+
+    def test_invalid_timestamp_format(self):
+        """Testing invalid format - expecting false"""
+
+        self.assertFalse(check_valid_format("16-25-25.000"))
+
+
+    def test_get_timestamps(self):
+        """Expecting to get sorted and unique timestamps from the list of logs"""
+
+        logs_list = [
+            #First dictionary(file) in the list
+            {"16:00:00.000": ["Message 1"], "16:00:01.000": ["Message 2"]},
+            #Second dictionary(file) in the list
+            {"16:00:00.000": ["Message 3"], "16:11:00.000": ["Message 4"]},
+        ]
+
+
+        expected_result = [
+            "16:00:00.000",
+            "16:00:01.000",
+            "16:11:00.000",
+        ]
+        self.assertEqual(get_timestamps(logs_list), expected_result)
+
+
+    def test_get_longest_message(self):
+        """Expecting to get the longest message(single or appedned) from the list of logs"""
+
+        logs_list = [
+            #First dictionary(file) in the list
+            {"16:00:00.000": ["First Message"], "16:03:00.000": ["Second one"]},
+            #Second dictionary(file) in the list
+            {"16:00:00.000": ["Longest Message in the list"], "16:11:00.000": ["Message 4"]},
+        ]
+
+        expected_result = len("Longest Message in the list") + 5
+        self.assertEqual(get_longest_message(logs_list), expected_result)
+        
+if __name__ == "__main__":
+    unittest.main()
+
+
